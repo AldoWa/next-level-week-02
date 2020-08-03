@@ -4,7 +4,7 @@
 </p>
 
 > Projeto Proffy, realizado durante o evento next-level-week-02 
-<img src="https://user-images.githubusercontent.com/53620227/89216989-d2b8d180-d5a1-11ea-91dd-ab5760d5062f.png" alt="next-level-week">
+<img src="https://user-images.githubusercontent.com/53620227/89216989-d2b8d180-d5a1-11ea-91dd-ab5760d5062f.png" alt="next-level-week"/>
 ### 🏠 [Homepage](https://github.com/Aldo-1/next-level-week-02)
 
 ## Author
