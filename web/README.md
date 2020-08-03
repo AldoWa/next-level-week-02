@@ -4,7 +4,7 @@
 </p>
 
 > Projeto Proffy, feito durante a next-level-week-02
-
+  <img alt="home" src="https://user-images.githubusercontent.com/53620227/89216345-9afd5a00-d5a0-11ea-8b05-b0b8555d96a1.png"/>
 ## Install
 
 ```sh
