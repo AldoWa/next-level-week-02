@@ -1,0 +1,36 @@
+{
+    "env": {
+        "es2020": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "prettier/prettier": "off",
+    "react/jsx-filename-extension": ["off", { "extensions": [".js", ".jsx"] }],
+    "import/prefer-default-export": "off",
+    "no-unused-vars": ["off", { "argsIgnorePattern": "^_" }],
+    "react/jsx-one-expression-per-line": "off",
+    "global-require": "off",
+    "react-native/no-raw-text": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "camelcase": "off",
+    "no-console": ["error", { "allow": ["tron"] }],
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "linebreak-style":"off",
+    "import/extensions":"off",
+    "import/no-unresolved":"off",
+    "class-methods-use-this":"off"
+}
+}
