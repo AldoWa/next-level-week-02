@@ -2,32 +2,47 @@ import React from 'react';
 import whatsapp from '../../assets/images/icons/whatsapp.svg'
 
 import './style.css'
+import api from '../../services/api';
 
-const TeacherItem: React.FC = () => {
+export interface Teacher{
+  id: string,
+  subject: string,
+  cost: number,
+  user_id?: number,
+  name: string,
+  avatar: string,
+  whatsapp: string,
+  bio: string,
+}
+
+
+const TeacherItem: React.FC<Teacher> = (props) => {
+  function handleCreateConnection(){
+    api.post('connections',
+    {
+     user_id: props.user_id 
+    })
+  }
   return (
     <article className="teacher-item">
       <header>
-        <img src="https://api.adorable.io/avatars/113/abott@adorable.png" alt="avatar"/>
+        <img src={props.avatar} alt="avatar"/>
         <div>
-          <strong>Diego Fernandes</strong>
-          <span>Quimica</span>
+          <strong>{props.name}</strong>
+          <span>{props.subject}</span>
         </div>
       </header>
-      <p>Entusiasta das melhores tecnologias de química avançada.
-        <br/><br/>
-        Apaixonado por explodir coisas em laboratório e por mudar a 
-        vida das pessoas através de experiencias. Mais de 200.000 pessoas 
-        ja passaram por uma das minhas explosões.
+      <p>{props.bio}
       </p>
       <footer>
         <p>
           Preço/hora
-          <strong>R$ 80.00</strong>
+          <strong>R$ {props.cost}</strong>
         </p>
-        <button type="button">
+        <a target="_blank"onClick={handleCreateConnection}href={`https://wa.me/${props.whatsapp} `}>
           <img src={whatsapp} alt="whatsapp"/>
           Entrar em contato
-        </button>
+        </a>
       </footer>
     </article>
   

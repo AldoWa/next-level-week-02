@@ -1,3 +1,5 @@
+import { Request, Response } from 'express';
+
 import db from '../database/connection';
 import convertHourToMinute from '../utils/convertHourToMinutes';
 
@@ -62,27 +64,34 @@ class ClassesController {
   async index(req:Request, res:Response) {
     const filters = req.query;
 
+    const subject = filters.subject as string;
+    const week_day = filters.week_day as string;
+    const time = filters.time as string;
+
     if (!filters.week_day || !filters.subject || !filters.time) {
       return res.status(400).json({
         error: 'missing filters to search classes',
       });
     }
 
-    const minuteConverterd = convertHourToMinute(filters.time as string);
-    const classes = await db('classes')
-      .whereExists(function () {
-        this.select('class_schedule.*')
-          .from('class_schedule')
-          .whereRaw('`class_schedule`.`class_id` = `classes`.`id`')
-          .whereRaw('`class_schedule`.`week_day` = ??', [Number(filters.week_day)])
-          .whereRaw('`class_schedule`.`from` <= ??', [minuteConverterd])
-          .whereRaw('`class_schedule`.`to` > ??', [minuteConverterd]);
-      })
-      .where('classes.subject', '=', filters.subject as string)
-      .join('users', 'classes.user_id', '=', 'users.id')
-      .select(['classes.*', 'users.*']);
-
-    return res.json(classes);
+    const minuteConverterd = convertHourToMinute(time);
+    try {
+      const classes = await db('classes')
+        .whereExists(function () {
+          this.select('class_schedule.*')
+            .from('class_schedule')
+            .whereRaw('`class_schedule`.`class_id` = `classes`.`id`')
+            .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)])
+            .whereRaw('`class_schedule`.`from` <= ??', [Number(minuteConverterd)])
+            .whereRaw('`class_schedule`.`to` > ??', [Number(minuteConverterd)]);
+        })
+        .where('classes.subject', '=', subject)
+        .join('users', 'classes.user_id', '=', 'users.id')
+        .select(['classes.*', 'users.*']);
+      return res.json(classes);
+    } catch (err) {
+      return res.status(400).json({ error: err });
+    }
   }
 }
 
